@@ -2,7 +2,7 @@
 
 Playing with the TypeScript type system.
 
-Note: This project is for fun, not for practical use.
+⚠️Note: This project is for fun, not for practical use.
 
 ## Radix Conversion
 

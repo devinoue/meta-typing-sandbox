@@ -1,4 +1,5 @@
-import { expectType } from "tsd";
-import { Sum } from "./AdditionWithStringLiteral";
+import { Sum } from './AdditionWithStringLiteral'
 
-expectType<Sum<1993999,999999>>(2993998)
+import { expectType } from 'tsd'
+
+expectType<Sum<1993999, 999999>>(2993998)

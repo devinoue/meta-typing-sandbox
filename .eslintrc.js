@@ -24,6 +24,18 @@ module.exports = {
     'prettier',
   ],
   rules: {
+    // Enforce consistent spacing after the // or /* in a comment
+    'autofix/spaced-comment': 'error',
+    // Disallow ternary operators when simpler alternatives exist
+    'autofix/no-unneeded-ternary': 'error',
+
+    // 'autofix/no-unused-vars': [
+    //   'warn',
+    //   {
+    //     vars: 'all',
+    //     varsIgnorePattern: '^(_|unused_)',
+    //   },
+    // ],
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-duplicates.md
     'import/no-duplicates': 'error',
     // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md

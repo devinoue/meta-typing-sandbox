@@ -1,29 +1,46 @@
 type Inc<T extends keyof IncTable> = IncTable[T]
 
-type IncTable = { "": "0", "0": "1"; "1": "2"; "2": "3"; "3": "4"; "4": "5"; "5": "6"; "6": "7"; "7": "8"; "8": "9"; "9": "0" };
+type IncTable = {
+  '': '0'
+  '0': '1'
+  '1': '2'
+  '2': '3'
+  '3': '4'
+  '4': '5'
+  '5': '6'
+  '6': '7'
+  '7': '8'
+  '8': '9'
+  '9': '0'
+}
 
-type Dec<T extends keyof DecTable > = DecTable[T]
+type Dec<T extends keyof DecTable> = DecTable[T]
 
-type DecTable = { "": "0", "0": "9"; "9": "8"; "8": "7"; "7": "6"; "6": "5"; "5": "4";"4": "3"; "3": "2"; "2": "1"; "1": "0" };
+type DecTable = {
+  '': '0'
+  '0': '9'
+  '1': '0'
+  '2': '1'
+  '3': '2'
+  '4': '3'
+  '5': '4'
+  '6': '5'
+  '7': '6'
+  '8': '7'
+  '9': '8'
+}
 
-
-type Add<
-  A extends keyof IncTable,
-  B extends keyof DecTable
-> = {
-  finish: A;
-  next: Add<Inc<A>, Dec<B>>;
-}[B extends "0" ? 'finish' : 'next'];
+type Add<A extends keyof IncTable, B extends keyof DecTable> = {
+  finish: A
+  next: Add<Inc<A>, Dec<B>>
+}[B extends '0' ? 'finish' : 'next']
 
 // 桁上りするかどうか
-type IsCarry<
-  A extends keyof IncTable,
-  B extends keyof DecTable,
-> = {
-  finishTrue: true;
+type IsCarry<A extends keyof IncTable, B extends keyof DecTable> = {
   finishFalse: false
-  next: IsCarry<Inc<A>, Dec<B>>;
-}[B extends "0" ? 'finishFalse' : A extends "0" ? 'finishTrue' : 'next'];
+  finishTrue: true
+  next: IsCarry<Inc<A>, Dec<B>>
+}[B extends '0' ? 'finishFalse' : A extends '0' ? 'finishTrue' : 'next']
 
 // 数字リテラルなどを文字列に
 type ToString<A extends number> = `${A}`
@@ -46,17 +63,33 @@ type Concat<A, B> = A extends string
 // 先頭文字を取る
 type Head<T> = T extends `${infer H}${any}` ? H : '0'
 
-type SumS<A extends string, B extends string, Agg = "", C= false>
-  =  `${A}${B}` extends "" 
-    ? C extends true ? Concat<"1", Agg> : Agg
-     : SumS<Tail<A>, Tail<B>, Concat<Add<C extends true ? Add<Head<A>,"1"> : Head<A>, Head<B>> ,Agg > , Add<Head<A>,"1"> extends "0" ? true : IsCarry<C extends true ? Add<Head<A>,"1"> : Head<A>, Head<B>> >
+type SumS<
+  A extends string,
+  B extends string,
+  Agg = '',
+  C = false,
+> = `${A}${B}` extends ''
+  ? C extends true
+    ? Concat<'1', Agg>
+    : Agg
+  : SumS<
+      Tail<A>,
+      Tail<B>,
+      Concat<Add<C extends true ? Add<Head<A>, '1'> : Head<A>, Head<B>>, Agg>,
+      Add<Head<A>, '1'> extends '0'
+        ? true
+        : IsCarry<C extends true ? Add<Head<A>, '1'> : Head<A>, Head<B>>
+    >
 
 // More specific inference for constrained 'infer' types in template literal types
 // https://github.com/microsoft/TypeScript/pull/48094
-type Is<T extends U, U> = T;
+type Is<T extends U, U> = T
 
-export type Sum<A extends number, B extends number> = SumS<Reverse<ToString<A>>, Reverse<ToString<B>>> extends `${Is<infer T, number>}` ? T : never;
+export type Sum<A extends number, B extends number> = SumS<
+  Reverse<ToString<A>>,
+  Reverse<ToString<B>>
+> extends `${Is<infer T, number>}`
+  ? T
+  : never
 
-type g = Sum<49734939,304488343>
-
-
+type g = Sum<49734939, 304488343>

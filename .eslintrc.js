@@ -7,6 +7,7 @@ module.exports = {
   // - https://github.com/infctr/eslint-plugin-typescript-sort-keys
   parser: '@typescript-eslint/parser',
   plugins: [
+    'eslint-plugin-expect-type',
     '@typescript-eslint',
     // https://github.com/aladdin-add/eslint-plugin/tree/master/packages/autofix#eslint-plugin-autofix
     'autofix',
@@ -20,6 +21,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:expect-type/recommended',
     // https://github.com/prettier/eslint-config-prettier#installation
     'prettier',
   ],

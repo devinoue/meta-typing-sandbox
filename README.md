@@ -16,3 +16,9 @@ Usually, addition in a type system uses a tuple type, but there was a limitation
 
 However, since TypeScript 4.8, it has become easier to convert strings to numbers, and [I saw this post](https://github.com/microsoft/TypeScript/pull/48094#issuecomment-1134232924).
 I tried to imitate it and tried another way of addition by string type.
+
+## Sorting algorithm
+
+[Quick sort](./src/QuickSort/QuickSort.ts)
+
+Efficient, general-purpose sorting algorithm. [See also](https://en.wikipedia.org/wiki/Quicksort)

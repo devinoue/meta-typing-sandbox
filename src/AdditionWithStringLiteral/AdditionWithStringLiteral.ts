@@ -14,7 +14,7 @@ type IncTable = {
   '9': '0'
 }
 
-type Dec<T extends keyof DecTable> = DecTable[T]
+export type Dec<T extends keyof DecTable> = DecTable[T]
 
 type DecTable = {
   '': '0'
@@ -92,4 +92,5 @@ export type Sum<A extends number, B extends number> = SumS<
   ? T
   : never
 
-type g = Sum<49734939, 304488343>
+type g = Sum<34939, 488343> // 523282
+//    ^? type g = 523282
